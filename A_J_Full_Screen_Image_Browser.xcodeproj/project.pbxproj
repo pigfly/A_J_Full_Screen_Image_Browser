@@ -17,6 +17,8 @@
 		14DE4D63204258D9003C7BF4 /* Image+AsyncDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4D62204258D9003C7BF4 /* Image+AsyncDownload.swift */; };
 		14DE4D6520426635003C7BF4 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4D6420426635003C7BF4 /* TransitionAnimator.swift */; };
 		14DE4D672042687E003C7BF4 /* UIView+SnapShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4D662042687E003C7BF4 /* UIView+SnapShot.swift */; };
+		14DE4D6B20426BE4003C7BF4 /* MaskImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4D6A20426BE4003C7BF4 /* MaskImageViewer.swift */; };
+		14DE4D6D20426C6A003C7BF4 /* FullScreenImageBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4D6C20426C6A003C7BF4 /* FullScreenImageBrowser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		14DE4D62204258D9003C7BF4 /* Image+AsyncDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+AsyncDownload.swift"; sourceTree = "<group>"; };
 		14DE4D6420426635003C7BF4 /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		14DE4D662042687E003C7BF4 /* UIView+SnapShot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SnapShot.swift"; sourceTree = "<group>"; };
+		14DE4D6A20426BE4003C7BF4 /* MaskImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskImageViewer.swift; sourceTree = "<group>"; };
+		14DE4D6C20426C6A003C7BF4 /* FullScreenImageBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageBrowser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				14DE4D5E204250CD003C7BF4 /* ZoomableImageView.swift */,
 				14DE4D60204257BE003C7BF4 /* SingleImageViewer.swift */,
 				14DE4D62204258D9003C7BF4 /* Image+AsyncDownload.swift */,
+				14DE4D6A20426BE4003C7BF4 /* MaskImageViewer.swift */,
+				14DE4D6C20426C6A003C7BF4 /* FullScreenImageBrowser.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -176,9 +182,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				14DE4D4C20424E77003C7BF4 /* ViewController.swift in Sources */,
+				14DE4D6B20426BE4003C7BF4 /* MaskImageViewer.swift in Sources */,
 				14DE4D61204257BE003C7BF4 /* SingleImageViewer.swift in Sources */,
 				14DE4D4A20424E77003C7BF4 /* AppDelegate.swift in Sources */,
 				14DE4D63204258D9003C7BF4 /* Image+AsyncDownload.swift in Sources */,
+				14DE4D6D20426C6A003C7BF4 /* FullScreenImageBrowser.swift in Sources */,
 				14DE4D5F204250CD003C7BF4 /* ZoomableImageView.swift in Sources */,
 				14DE4D6520426635003C7BF4 /* TransitionAnimator.swift in Sources */,
 				14DE4D672042687E003C7BF4 /* UIView+SnapShot.swift in Sources */,
