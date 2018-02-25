@@ -8,7 +8,7 @@
 
 import UIKit
 
-final public class INSScalingImageView: UIScrollView {
+final public class ZoomableImageView: UIScrollView {
 
     // MARK: - Property
     public lazy var imageView: UIImageView = {
@@ -56,7 +56,8 @@ final public class INSScalingImageView: UIScrollView {
         centerScrollViewContents()
     }
 
-    func centerScrollViewContents() {
+    // MARK: - Private
+    private func centerScrollViewContents() {
         var horizontalInset: CGFloat = 0
         var verticalInset: CGFloat = 0
 

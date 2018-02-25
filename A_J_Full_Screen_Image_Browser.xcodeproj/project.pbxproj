@@ -13,6 +13,8 @@
 		14DE4D5120424E77003C7BF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DE4D5020424E77003C7BF4 /* Assets.xcassets */; };
 		14DE4D5420424E77003C7BF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DE4D5220424E77003C7BF4 /* LaunchScreen.storyboard */; };
 		14DE4D5F204250CD003C7BF4 /* ZoomableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4D5E204250CD003C7BF4 /* ZoomableImageView.swift */; };
+		14DE4D61204257BE003C7BF4 /* SingleImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4D60204257BE003C7BF4 /* SingleImageViewer.swift */; };
+		14DE4D63204258D9003C7BF4 /* Image+AsyncDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE4D62204258D9003C7BF4 /* Image+AsyncDownload.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		14DE4D5320424E77003C7BF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14DE4D5520424E77003C7BF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14DE4D5E204250CD003C7BF4 /* ZoomableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImageView.swift; sourceTree = "<group>"; };
+		14DE4D60204257BE003C7BF4 /* SingleImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewer.swift; sourceTree = "<group>"; };
+		14DE4D62204258D9003C7BF4 /* Image+AsyncDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+AsyncDownload.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				14DE4D5E204250CD003C7BF4 /* ZoomableImageView.swift */,
+				14DE4D60204257BE003C7BF4 /* SingleImageViewer.swift */,
+				14DE4D62204258D9003C7BF4 /* Image+AsyncDownload.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -164,7 +170,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				14DE4D4C20424E77003C7BF4 /* ViewController.swift in Sources */,
+				14DE4D61204257BE003C7BF4 /* SingleImageViewer.swift in Sources */,
 				14DE4D4A20424E77003C7BF4 /* AppDelegate.swift in Sources */,
+				14DE4D63204258D9003C7BF4 /* Image+AsyncDownload.swift in Sources */,
 				14DE4D5F204250CD003C7BF4 /* ZoomableImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
