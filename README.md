@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/logo.png?raw=true">
+</p>
+
 # A-J-Full-Screen-Image-Browser
 
 ![Travis](https://img.shields.io/travis/USER/REPO.svg)
@@ -29,7 +33,24 @@ A-J-Full-Screen-Image-Browser is an drop-in solution for full screen image and v
 
 ## Demo
 
-- 
+<p align="center">
+    <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/demo.gif?raw=true">
+</p>
+
+<p align="center">
+    <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/demo2.gif?raw=true">
+</p>
+
+<p align="center">
+    <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/demo3.gif?raw=true">
+</p>
+
+## HLD
+
+<p align="center">
+    <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/hld.png?raw=true">
+</p>
+
 
 ## Credits
 
