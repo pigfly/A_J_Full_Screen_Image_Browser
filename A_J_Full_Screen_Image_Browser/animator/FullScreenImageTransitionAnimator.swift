@@ -8,7 +8,7 @@
 
 import UIKit
 
-public final class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+public final class FullScreenImageTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     var dismissing: Bool = false
 
     var startingView: UIView?
@@ -37,9 +37,7 @@ public final class TransitionAnimator: NSObject, UIViewControllerAnimatedTransit
     var zoomingAnimationSpringDamping = 0.9
 
     var shouldPerformZoomingAnimation: Bool {
-        get {
-            return self.startingView != nil && self.endingView != nil
-        }
+        return startingView != nil && endingView != nil
     }
 
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -56,7 +54,7 @@ public final class TransitionAnimator: NSObject, UIViewControllerAnimatedTransit
         return transitionDuration(using: transitionContext)
     }
 
-    // MARK:- UIViewControllerAnimatedTransitioning
+    // MARK: - UIViewControllerAnimatedTransitioning
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         setupTransitionContainerHierarchyWithTransitionContext(transitionContext)
 
@@ -94,7 +92,7 @@ public final class TransitionAnimator: NSObject, UIViewControllerAnimatedTransit
 
         UIView.animate(withDuration: fadeDurationForTransitionContext(transitionContext), animations: { () -> Void in
             fadeView?.alpha = endingAlpha
-        }) { finished in
+        }) { _ in
             if !self.shouldPerformZoomingAnimation {
                 self.completeTransitionWithTransitionContext(transitionContext)
             }
@@ -131,12 +129,12 @@ public final class TransitionAnimator: NSObject, UIViewControllerAnimatedTransit
         let fadeInDuration = transitionDuration(using: transitionContext) * animationDurationEndingViewFadeInRatio
         let fadeOutDuration = transitionDuration(using: transitionContext) * animationDurationStartingViewFadeOutRatio
 
-        UIView.animate(withDuration: fadeInDuration, delay: 0.0, options: [.allowAnimatedContent,.beginFromCurrentState], animations: { () -> Void in
+        UIView.animate(withDuration: fadeInDuration, delay: 0.0, options: [.allowAnimatedContent, .beginFromCurrentState], animations: { () -> Void in
             endingViewForAnimation.alpha = 1.0
-        }) { result in
-            UIView.animate(withDuration: fadeOutDuration, delay: 0.0, options: [.allowAnimatedContent,.beginFromCurrentState], animations: { () -> Void in
+        }) { _ in
+            UIView.animate(withDuration: fadeOutDuration, delay: 0.0, options: [.allowAnimatedContent, .beginFromCurrentState], animations: { () -> Void in
                 startingViewForAnimation.alpha = 0.0
-            }, completion: { result in
+            }, completion: { _ in
                 startingViewForAnimation.removeFromSuperview()
             })
         }
@@ -144,13 +142,13 @@ public final class TransitionAnimator: NSObject, UIViewControllerAnimatedTransit
         let startingViewFinalTransform = 1.0 / endingViewInitialTransform
         let translatedEndingViewFinalCenter = endingView.aj_translatedCenterPointToContainerView(containerView)
 
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping:CGFloat(zoomingAnimationSpringDamping), initialSpringVelocity:0, options: [.allowAnimatedContent,.beginFromCurrentState], animations: { () -> Void in
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping:CGFloat(zoomingAnimationSpringDamping), initialSpringVelocity:0, options: [.allowAnimatedContent, .beginFromCurrentState], animations: { () -> Void in
             endingViewForAnimation.transform = finalEndingViewTransform
             endingViewForAnimation.center = translatedEndingViewFinalCenter
             startingViewForAnimation.transform = startingViewForAnimation.transform.scaledBy(x: startingViewFinalTransform, y: startingViewFinalTransform)
             startingViewForAnimation.center = translatedEndingViewFinalCenter
 
-        }) { result in
+        }) { _ in
             endingViewForAnimation.removeFromSuperview()
             endingView.alpha = 1.0
             startingView.alpha = 1.0

@@ -30,8 +30,8 @@ public final class SingleImageViewer: UIViewController, UIScrollViewDelegate {
     }()
 
     // MARK: - Init
-    public init(photo: ImageAsyncDownloadable) {
-        asyncImage = photo
+    public init(image: ImageAsyncDownloadable) {
+        asyncImage = image
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -95,7 +95,8 @@ public final class SingleImageViewer: UIViewController, UIScrollViewDelegate {
         let pointInView = recognizer.location(in: zoomableImageview.imageView)
         var newZoomScale = zoomableImageview.maximumZoomScale
 
-        if zoomableImageview.zoomScale >= zoomableImageview.maximumZoomScale || abs(zoomableImageview.zoomScale - zoomableImageview.maximumZoomScale) <= 0.01 {
+        if zoomableImageview.zoomScale >= zoomableImageview.maximumZoomScale ||
+            abs(zoomableImageview.zoomScale - zoomableImageview.maximumZoomScale) <= 0.01 {
             newZoomScale = zoomableImageview.minimumZoomScale
         }
 

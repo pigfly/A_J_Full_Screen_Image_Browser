@@ -61,15 +61,15 @@ final public class ZoomableImageView: UIScrollView {
         var horizontalInset: CGFloat = 0
         var verticalInset: CGFloat = 0
 
-        if (contentSize.width < bounds.width) {
+        if contentSize.width < bounds.width {
             horizontalInset = (bounds.width - contentSize.width) * 0.5
         }
 
-        if (contentSize.height < bounds.height) {
+        if contentSize.height < bounds.height {
             verticalInset = (bounds.height - contentSize.height) * 0.5
         }
 
-        if (window?.screen.scale < 2.0) {
+        if window?.screen.scale < 2.0 {
             horizontalInset = floor(horizontalInset)
             verticalInset = floor(verticalInset)
         }

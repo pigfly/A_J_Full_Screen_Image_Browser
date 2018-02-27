@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:../A_J_Full_Screen_Image_Browser/animator"
+      name = "animator">
+      <FileRef
+         location = "group:FullScreenImageTransitionAnimator.swift">
+      </FileRef>
+   </Group>
+   <Group
+      location = "group:../A_J_Full_Screen_Image_Browser/asset"
+      name = "asset">
+      <FileRef
+         location = "group:FullScreenImageBrowser.bundle">
+      </FileRef>
+   </Group>
+   <Group
+      location = "group:../A_J_Full_Screen_Image_Browser/core"
+      name = "core">
+      <FileRef
+         location = "group:FullScreenImageBrowser.swift">
+      </FileRef>
+      <FileRef
+         location = "group:FullScreenImageBrowserViewModel.swift">
+      </FileRef>
+      <FileRef
+         location = "group:Image+AsyncDownload.swift">
+      </FileRef>
+      <FileRef
+         location = "group:MaskImageViewer.swift">
+      </FileRef>
+      <FileRef
+         location = "group:SingleImageViewer.swift">
+      </FileRef>
+      <FileRef
+         location = "group:ZoomableImageView.swift">
+      </FileRef>
+   </Group>
+   <Group
+      location = "group:../A_J_Full_Screen_Image_Browser/helper"
+      name = "helper">
+      <FileRef
+         location = "group:SingleImage.swift">
+      </FileRef>
+      <FileRef
+         location = "group:UIView+SnapShot.swift">
+      </FileRef>
+   </Group>
    <FileRef
-      location = "self:A_J_Full_Screen_Image_Browser.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>

@@ -10,6 +10,7 @@ import UIKit
 
 public protocol ImageAsyncDownloadable: class {
     var image: UIImage? { get }
+    var imageURL: URL? { get }
 
     func loadImageWithCompletionHandler(_ completion: @escaping (_ image: UIImage?, _ error: NSError?) -> ())
 }
