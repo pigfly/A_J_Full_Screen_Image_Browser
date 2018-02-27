@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 public final class FullScreenImageBrowser: UIViewController {
 
@@ -31,6 +32,7 @@ public final class FullScreenImageBrowser: UIViewController {
         }
         didSet {
             maskView.imagesBrowser = self
+            maskView.shouldShowVideoButton = viewModel.shouldShowVideo
             maskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             maskView.frame = view.bounds
             view.addSubview(maskView)
@@ -81,6 +83,7 @@ public final class FullScreenImageBrowser: UIViewController {
 
     private func initialSetupWithImage(_ image: ImageAsyncDownloadable? = nil) {
         maskView.imagesBrowser = self
+        maskView.shouldShowVideoButton = viewModel.shouldShowVideo
         setupPageViewControllerWith(image)
 
         modalPresentationStyle = .custom
@@ -88,7 +91,6 @@ public final class FullScreenImageBrowser: UIViewController {
         modalPresentationCapturesStatusBarAppearance = true
 
         let textColor = view.tintColor ?? UIColor.white
-        maskView.imagesBrowser = self
         #if swift(>=4.0)
             maskView.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor]
         #else
@@ -255,5 +257,16 @@ extension FullScreenImageBrowser {
 
     public override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .fade
+    }
+}
+
+// MARK: - Video Showcase
+extension FullScreenImageBrowser {
+    public func playVideo() {
+        guard let _url = viewModel.videoUrl else { debugPrint("\(#file) invalid url found for video"); return }
+        let player = AVPlayer(url: _url)
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        present(playerController, animated: true, completion: nil)
     }
 }

@@ -10,14 +10,20 @@ import Foundation
 
 public struct FullScreenImageBrowserViewModel {
 
-    public init(urls: [URL?]) {
+    public init(urls: [URL?], videoUrl: URL? = nil) {
         self.urls = urls
+        self.videoUrl = videoUrl
 
         images = urls.flatMap { SingleImage(imageURL: $0) }
     }
 
     public private(set) var urls: [URL?]
+    public private(set) var videoUrl: URL?
     public private(set) var images: [ImageAsyncDownloadable] = []
+
+    public var shouldShowVideo: Bool {
+        return videoUrl != nil
+    }
 
     public var numberOfImages: Int {
         return images.count

@@ -22,6 +22,13 @@ public final class MaskImageView: UIView , MaskImageViewable {
     public weak var imagesBrowser: FullScreenImageBrowser?
     private var currentImage: ImageAsyncDownloadable?
 
+    public var shouldShowVideoButton: Bool = false {
+        didSet {
+            guard !shouldShowVideoButton else { return }
+            rightBarButtonItem = nil
+        }
+    }
+
     public var leftBarButtonItem: UIBarButtonItem? {
         didSet {
             navigationItem.leftBarButtonItem = leftBarButtonItem
@@ -101,7 +108,7 @@ public final class MaskImageView: UIView , MaskImageViewable {
     }
 
     @objc private func actionButtonTapped(_ sender: UIBarButtonItem) {
-        // TODO
+        imagesBrowser?.playVideo()
     }
 
     private func setupNavigationBar() {
@@ -134,12 +141,15 @@ public final class MaskImageView: UIView , MaskImageViewable {
                                                 target: self,
                                                 action: #selector(MaskImageView.closeButtonTapped(_:)))
         } else {
-            leftBarButtonItem = UIBarButtonItem(title: "CLOSE".uppercased(),
+            leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Close",comment:""),
                                                 style: .plain,
                                                 target: self,
                                                 action: #selector(MaskImageView.closeButtonTapped(_:)))
         }
 
-        rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(MaskImageView.actionButtonTapped(_:)))
+        rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Video",comment:""),
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(MaskImageView.actionButtonTapped(_:)))
     }
 }
