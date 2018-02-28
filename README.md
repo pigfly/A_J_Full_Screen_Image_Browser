@@ -20,6 +20,7 @@ A-J-Full-Screen-Image-Browser is an drop-in solution for full screen image and v
 - [x] Swipe to dismiss
 - [x] High level diagram
 - [x] MVVM architecture
+- [x] Full documentation
 - [x] Easy to customise
 
 ## Requirements
@@ -56,6 +57,36 @@ final class ViewController: UIViewController {
     }
 ```
 
+## Folder Structure
+
+```shell
+├── animator
+│   └── FullScreenImageTransitionAnimator.swift
+├── asset
+│   └── FullScreenImageBrowser.bundle
+│       ├── close.png
+│       ├── close@2x.png
+│       └── close@3x.png
+├── core
+│   ├── FullScreenImageBrowser.swift
+│   ├── FullScreenImageBrowserViewModel.swift
+│   ├── Image+AsyncDownload.swift
+│   ├── MaskImageViewer.swift
+│   ├── SingleImageViewer.swift
+│   └── ZoomableImageView.swift
+└── helper
+    ├── SingleImage.swift
+    └── UIView+SnapShot.swift
+```
+
+- animator: customised fade in/fade out with damping factors
+- asset: customised static image asset for the full screen image/video browser navigation bar
+- core/FullScreenImageBrowser: manager class to be responsible for full screen image/video browser
+- core/FullScreenImageBrowserViewModel: datasource and business logic for full screen image/video browser
+- core/Image+AsyncDownload: protocol to define images to be able to asynchronously download
+- core/MaskImageViewer: `customised` overlay view for full screen image/video browser
+- core/SingleImageViewer: view controller to be responsible for single image rendering on the full screen
+- core/ZoomableImageView: view to add support for image to zoom, pin, rotate, and animation
 
 ## Demo
 
