@@ -5,7 +5,8 @@
 # A-J-Full-Screen-Image-Browser
 
 ![Travis](https://img.shields.io/travis/USER/REPO.svg)
-![Code](https://img.shields.io/amo/stars/dustman.svg)
+![Code](https://img.shields.io/badge/code-%E2%98%85%E2%98%85%E2%98%85%E2%98%85%E2%98%85-brightgreen.svg)
+![Swift](https://img.shields.io/badge/Swift-%3E%3D%203.1-orange.svg)
 ![npm](https://img.shields.io/npm/l/express.svg)
 
 A-J-Full-Screen-Image-Browser is an drop-in solution for full screen image and video browser
