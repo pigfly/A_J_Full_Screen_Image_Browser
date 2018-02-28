@@ -47,8 +47,10 @@ final class ViewController: UIViewController {
     lazy var urls = [URL(string: "https://images.unsplash.com/photo-1502899576159-f224dc2349fa?ixlib=rb-0.3.5&s=4f3943a5d663f9bb062d7d380c8d6fdf&auto=format&fit=crop&w=3700&q=80")!,
                      URL(string: "https://images.unsplash.com/photo-1445264918150-66a2371142a2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=79730c9ec106e3ccee026c648c624e5f&auto=format&fit=crop&w=3800&q=80")!]
 
+    lazy var videoUrl = URL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!
+
     @IBAction func onButtonTapped(_ sender: UIButton) {
-        let vm = FullScreenImageBrowserViewModel(urls: urls)
+        let vm = FullScreenImageBrowserViewModel(urls: urls, videoUrl: videoUrl)
         let x = FullScreenImageBrowser(viewModel: vm)
         present(x, animated: true, completion: nil)
     }
