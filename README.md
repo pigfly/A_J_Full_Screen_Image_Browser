@@ -79,14 +79,16 @@ final class ViewController: UIViewController {
     └── UIView+SnapShot.swift
 ```
 
-- animator: customised fade in/fade out with damping factors
-- asset: customised static image asset for the full screen image/video browser navigation bar
-- core/FullScreenImageBrowser: manager class to be responsible for full screen image/video browser
-- core/FullScreenImageBrowserViewModel: datasource and business logic for full screen image/video browser
-- core/Image+AsyncDownload: protocol to define images to be able to asynchronously download
-- core/MaskImageViewer: `customised` overlay view for full screen image/video browser
-- core/SingleImageViewer: view controller to be responsible for single image rendering on the full screen
-- core/ZoomableImageView: view to add support for image to zoom, pin, rotate, and animation
+| File                                 | Responsiblity                                                                        |
+|--------------------------------------|--------------------------------------------------------------------------------------|
+| animator                             | customised fade in/fade out animations with damping factors                          |
+| asset                                | customised static image asset for the full screen image/video browser navigation bar |
+| core/FullScreenImageBrowser          | manager class to be responsible for full screen image/video browser                  |
+| core/FullScreenImageBrowserViewModel | datasource and business logic for full screen image/video browser                    |
+| core/Image+AsyncDownload             | protocol to define images to be able to asynchronously download                      |
+| core/MaskImageViewer                 | `customised` overlay view for full screen image/video browser                        |
+| core/SingleImageViewer               | view controller to be responsible for single image rendering on the full screen      |
+| core/ZoomableImageView               | view to add support for image to zoom, pin, rotate, and animation                    |
 
 ## Demo
 
