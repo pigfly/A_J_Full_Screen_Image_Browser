@@ -141,8 +141,7 @@ public final class MaskImageView: UIView , MaskImageViewable {
                                                 target: self,
                                                 action: #selector(MaskImageView.closeButtonTapped(_:)))
         } else {
-            leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Close",comment:""),
-                                                style: .plain,
+            leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
                                                 target: self,
                                                 action: #selector(MaskImageView.closeButtonTapped(_:)))
         }
