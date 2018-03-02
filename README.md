@@ -58,6 +58,60 @@ final class ViewController: UIViewController {
     }
 ```
 
+## AlamofireImage Support
+
+> By default, `FullScreenImageBrowser` doesn't use any 3rd library, the `SingleImage` uses `URLSession` to fetch image. However it's designed to be compatible with any networking library, one good example is [AlamofireImage](https://github.com/Alamofire/AlamofireImage)
+
+The following code snippet shows an example how to use `AlamofireImage` to seamlessly integrated with `FullScreenImageBrowser`.
+
+```swift
+import Foundation
+import AlamofireImage
+
+public class FullScreenImage: ImageAsyncDownloadable {
+    public var image: UIImage?
+    public var imageURL: URL?
+
+    private let downloader = ImageDownloader()
+
+    public init(imageURL: URL?) {
+        self.imageURL = imageURL
+    }
+
+    public func loadImageWithCompletionHandler(_ completion: @escaping (UIImage?, NSError?) -> Void) {
+        if let image = image {
+            completion(image, nil)
+            return
+        }
+        loadImageWithURL(imageURL, completion: completion)
+    }
+
+    // use any network calls you like
+    public func loadImageWithURL(_ url: URL?, completion: @escaping (_ image: UIImage?, _ error: NSError?) -> Void) {
+        guard let _url = url else {
+            completion(nil, NSError(domain: "FullScreenImageBrowserDomain",
+                                    code: -2,
+                                    userInfo: [ NSLocalizedDescriptionKey: "Image URL not found."]))
+            return
+        }
+        let urlRequest = URLRequest(url: _url)
+
+        downloader.download(urlRequest) { [weak self] response in
+            debugPrint(response.result)
+
+            if let remoteImage = response.result.value {
+                self?.image = remoteImage
+                completion(remoteImage, nil)
+            } else {
+                completion(nil, NSError(domain: "FullScreenImageBrowserDomain",
+                                        code: -1,
+                                        userInfo: [ NSLocalizedDescriptionKey: "Couldn't load image from remote"]))
+            }
+        }
+    }
+}
+```
+
 ## Folder Structure
 
 ```shell
@@ -104,6 +158,15 @@ final class ViewController: UIViewController {
 <p align="center">
     <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/demo3.gif?raw=true">
 </p>
+
+<p align="center">
+    <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/demo4.gif?raw=true">
+</p>
+
+<p align="center">
+    <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/demo5.gif?raw=true">
+</p>
+
 
 ## HLD
 
