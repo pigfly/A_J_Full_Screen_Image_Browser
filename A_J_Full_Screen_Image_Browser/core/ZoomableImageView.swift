@@ -100,6 +100,10 @@ final public class ZoomableImageView: UIScrollView {
         minimumZoomScale = minScale
         maximumZoomScale = max(minScale, maximumZoomScale)
 
+        if abs(minScale - maximumZoomScale) < 0.01 {
+            maximumZoomScale = minScale * 3.0
+        }
+
         zoomScale = minimumZoomScale
         panGestureRecognizer.isEnabled = false
     }
