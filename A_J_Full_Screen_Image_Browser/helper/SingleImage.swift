@@ -11,7 +11,8 @@ import UIKit
 public final class SingleImage: ImageAsyncDownloadable {
     public var image: UIImage?
     public var imageURL: URL?
-
+    public var isVideoThumbnail: Bool = false
+    
     public init(imageURL: URL?) {
         self.imageURL = imageURL
     }
@@ -27,22 +28,19 @@ public final class SingleImage: ImageAsyncDownloadable {
     // override this method to use your favourite networking service
     public func loadImageWithURL(_ url: URL?, completion: @escaping (_ image: UIImage?, _ error: NSError?) -> ()) {
         let session = URLSession(configuration: URLSessionConfiguration.default)
+        guard let imageURL = url else { completion(nil, NSError(domain: "FullScreenImageBrowserDomain", code: -2, userInfo: [ NSLocalizedDescriptionKey: "Image URL not found."])); return }
 
-        if let imageURL = url {
-            session.dataTask(with: imageURL, completionHandler: { (response, data, error) in
-                DispatchQueue.main.async(execute: { () -> Void in
-                    if error != nil {
-                        completion(nil, error as NSError?)
-                    } else if let response = response, let image = UIImage(data: response) {
-                        completion(image, nil)
-                    } else {
-                        completion(nil, NSError(domain: "FullScreenImageBrowserDomain", code: -1, userInfo: [ NSLocalizedDescriptionKey: "Couldn't load image"]))
-                    }
-                    session.finishTasksAndInvalidate()
-                })
-            }).resume()
-        } else {
-            completion(nil, NSError(domain: "FullScreenImageBrowserDomain", code: -2, userInfo: [ NSLocalizedDescriptionKey: "Image URL not found."]))
-        }
+        session.dataTask(with: imageURL, completionHandler: {[unowned self] (response, data, error) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    completion(nil, error as NSError?)
+                } else if let response = response, let image = UIImage(data: response) {
+                    completion(self.isVideoThumbnail ? image.aj_imageWithPlayIcon() : image, nil)
+                } else {
+                    completion(nil, NSError(domain: "FullScreenImageBrowserDomain", code: -1, userInfo: [ NSLocalizedDescriptionKey: "Couldn't load image"]))
+                }
+                session.finishTasksAndInvalidate()
+            }
+        }).resume()
     }
 }
