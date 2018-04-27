@@ -34,7 +34,7 @@ public struct FullScreenImageBrowserViewModel {
     // MARK: - Image
 
     public var numberOfImages: Int {
-        return images.count + videoThumbnails.count
+        return images.count
     }
 
     public func imageAtIndex(_ index: Int) -> ImageAsyncDownloadable? {
@@ -60,7 +60,7 @@ public struct FullScreenImageBrowserViewModel {
 
     public func videoURLAtIndex(_ index: Int) -> URL? {
         guard index < images.count && index > 0 else { return nil }
-        let videoIdx = index - images.count
+        let videoIdx = index + 1 - images.count
         guard videoIdx >= 0 else { return nil }
 
         return videoUrls[videoIdx]
