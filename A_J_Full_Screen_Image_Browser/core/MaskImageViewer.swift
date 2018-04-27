@@ -22,21 +22,9 @@ public final class MaskImageView: UIView , MaskImageViewable {
     public weak var imagesBrowser: FullScreenImageBrowser?
     private var currentImage: ImageAsyncDownloadable?
 
-    public var shouldShowVideoButton: Bool = false {
-        didSet {
-            guard !shouldShowVideoButton else { return }
-            rightBarButtonItem = nil
-        }
-    }
-
     public var leftBarButtonItem: UIBarButtonItem? {
         didSet {
             navigationItem.leftBarButtonItem = leftBarButtonItem
-        }
-    }
-    public var rightBarButtonItem: UIBarButtonItem? {
-        didSet {
-            navigationItem.rightBarButtonItem = rightBarButtonItem
         }
     }
 
@@ -107,10 +95,6 @@ public final class MaskImageView: UIView , MaskImageViewable {
         imagesBrowser?.dismiss(animated: true, completion: nil)
     }
 
-    @objc private func actionButtonTapped(_ sender: UIBarButtonItem) {
-        imagesBrowser?.playVideo()
-    }
-
     private func setupNavigationBar() {
         navigationBar = UINavigationBar()
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
@@ -145,10 +129,5 @@ public final class MaskImageView: UIView , MaskImageViewable {
                                                 target: self,
                                                 action: #selector(MaskImageView.closeButtonTapped(_:)))
         }
-
-        rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Video",comment:""),
-                                             style: .plain,
-                                             target: self,
-                                             action: #selector(MaskImageView.actionButtonTapped(_:)))
     }
 }
