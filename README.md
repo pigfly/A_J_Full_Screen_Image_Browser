@@ -178,6 +178,9 @@ public class FullScreenImage: ImageAsyncDownloadable {
     <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/demo5.gif?raw=true">
 </p>
 
+<p align="center">
+    <img src="https://github.com/pigfly/A_J_Full_Screen_Image_Browser/blob/master/assets/demo6.gif?raw=true">
+</p>
 
 ## HLD
 
