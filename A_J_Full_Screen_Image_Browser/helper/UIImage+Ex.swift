@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIImage {
     public func aj_imageWithPlayIcon() -> UIImage {
-        guard let bundlePath = Bundle(for: type(of: self)).path(forResource: "FullScreenImageBrowser", ofType: "bundle") else { return self }
+        guard let bundlePath = Bundle(for: SingleImage.self).path(forResource: "FullScreenImageBrowser", ofType: "bundle") else { return self }
         guard let playButtonImage = UIImage(named: "video-play-icon", in: Bundle(path: bundlePath), compatibleWith: nil) else { return self }
 
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
