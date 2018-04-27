@@ -16,6 +16,7 @@ A-J-Full-Screen-Image-Browser is an drop-in solution for full screen image and v
 - [x] No Dependency, 100% iOS Native
 - [x] Support both iPad and iPhone family
 - [x] Support image resizing on different screen orientation
+- [x] Support multiple videos and images
 - [x] Image can be panned, zoomed and rotated
 - [x] Double tap to zoom all the way in and again to zoom all the way out
 - [x] Swipe to dismiss
@@ -49,13 +50,23 @@ final class ViewController: UIViewController {
     lazy var urls = [URL(string: "https://images.unsplash.com/photo-1502899576159-f224dc2349fa?ixlib=rb-0.3.5&s=4f3943a5d663f9bb062d7d380c8d6fdf&auto=format&fit=crop&w=3700&q=80")!,
                      URL(string: "https://images.unsplash.com/photo-1445264918150-66a2371142a2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=79730c9ec106e3ccee026c648c624e5f&auto=format&fit=crop&w=3800&q=80")!]
 
-    lazy var videoUrl = URL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!
+    // videos are just key-value pair
+    // key: video url
+    // value: thumbnail url for associated video url
+    lazy var videos = [URL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!: URL(string: "https://images.unsplash.com/photo-1502899576159-f224dc2349fa?ixlib=rb-0.3.5&s=4f3943a5d663f9bb062d7d380c8d6fdf&auto=format&fit=crop&w=3700&q=80")!]
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
 
     @IBAction func onButtonTapped(_ sender: UIButton) {
-        let vm = FullScreenImageBrowserViewModel(urls: urls, videoUrl: videoUrl)
+        let vm = FullScreenImageBrowserViewModel(imageURLs: urls, videos: videos)
         let x = FullScreenImageBrowser(viewModel: vm)
         present(x, animated: true, completion: nil)
     }
+
+}
 ```
 
 ## AlamofireImage Support
