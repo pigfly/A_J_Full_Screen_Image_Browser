@@ -12,6 +12,7 @@
 		14DE4D4F20424E77003C7BF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DE4D4D20424E77003C7BF4 /* Main.storyboard */; };
 		14DE4D5120424E77003C7BF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DE4D5020424E77003C7BF4 /* Assets.xcassets */; };
 		14DE4D5420424E77003C7BF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DE4D5220424E77003C7BF4 /* LaunchScreen.storyboard */; };
+		D6E787282092CEC1007E64C1 /* UIImage+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E787272092CEC1007E64C1 /* UIImage+Ex.swift */; };
 		D6EE23322044E41B00E8C3AF /* SingleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EE23302044E41B00E8C3AF /* SingleImage.swift */; };
 		D6EE23332044E41B00E8C3AF /* UIView+SnapShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EE23312044E41B00E8C3AF /* UIView+SnapShot.swift */; };
 		D6EE233F2044E45700E8C3AF /* FullScreenImageBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6EE23352044E45700E8C3AF /* FullScreenImageBrowser.bundle */; };
@@ -32,6 +33,7 @@
 		14DE4D5020424E77003C7BF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14DE4D5320424E77003C7BF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14DE4D5520424E77003C7BF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6E787272092CEC1007E64C1 /* UIImage+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ex.swift"; sourceTree = "<group>"; };
 		D6EE23302044E41B00E8C3AF /* SingleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImage.swift; sourceTree = "<group>"; };
 		D6EE23312044E41B00E8C3AF /* UIView+SnapShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SnapShot.swift"; sourceTree = "<group>"; };
 		D6EE23352044E45700E8C3AF /* FullScreenImageBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FullScreenImageBrowser.bundle; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				D6EE23302044E41B00E8C3AF /* SingleImage.swift */,
 				D6EE23312044E41B00E8C3AF /* UIView+SnapShot.swift */,
+				D6E787272092CEC1007E64C1 /* UIImage+Ex.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				D6EE23452044E45700E8C3AF /* SingleImageViewer.swift in Sources */,
 				D6EE23332044E41B00E8C3AF /* UIView+SnapShot.swift in Sources */,
 				14DE4D4C20424E77003C7BF4 /* ViewController.swift in Sources */,
+				D6E787282092CEC1007E64C1 /* UIImage+Ex.swift in Sources */,
 				D6EE23402044E45700E8C3AF /* FullScreenImageTransitionAnimator.swift in Sources */,
 				D6EE23322044E41B00E8C3AF /* SingleImage.swift in Sources */,
 				D6EE23422044E45700E8C3AF /* FullScreenImageBrowserViewModel.swift in Sources */,
