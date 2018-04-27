@@ -11,10 +11,11 @@ import UIKit
 public final class SingleImage: ImageAsyncDownloadable {
     public var image: UIImage?
     public var imageURL: URL?
-    public var isVideoThumbnail: Bool = false
+    public var isVideoThumbnail: Bool
     
-    public init(imageURL: URL?) {
+    public init(imageURL: URL?, isVideoThumbnail: Bool = false) {
         self.imageURL = imageURL
+        self.isVideoThumbnail = isVideoThumbnail
     }
 
     public func loadImageWithCompletionHandler(_ completion: @escaping (UIImage?, NSError?) -> ()) {

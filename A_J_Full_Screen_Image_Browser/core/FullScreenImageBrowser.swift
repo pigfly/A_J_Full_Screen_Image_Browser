@@ -32,7 +32,6 @@ public final class FullScreenImageBrowser: UIViewController {
         }
         didSet {
             maskView.imagesBrowser = self
-            maskView.shouldShowVideoButton = viewModel.shouldShowVideo
             maskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             maskView.frame = view.bounds
             view.addSubview(maskView)
@@ -47,14 +46,14 @@ public final class FullScreenImageBrowser: UIViewController {
 
     // MARK: - Init
     required public init?(coder aDecoder: NSCoder) {
-        viewModel = FullScreenImageBrowserViewModel(urls: [])
+        viewModel = FullScreenImageBrowserViewModel(imageURLs: [])
         pageViewController = UIPageViewController()
         super.init(nibName: nil, bundle: nil)
         initialSetupWithImage(nil)
     }
 
     public override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
-        viewModel = FullScreenImageBrowserViewModel(urls: [])
+        viewModel = FullScreenImageBrowserViewModel(imageURLs: [])
         pageViewController = UIPageViewController()
         super.init(nibName: nil, bundle: nil)
         initialSetupWithImage(nil)
@@ -83,7 +82,6 @@ public final class FullScreenImageBrowser: UIViewController {
 
     private func initialSetupWithImage(_ image: ImageAsyncDownloadable? = nil) {
         maskView.imagesBrowser = self
-        maskView.shouldShowVideoButton = viewModel.shouldShowVideo
         setupPageViewControllerWith(image)
 
         modalPresentationStyle = .custom
@@ -235,6 +233,9 @@ extension FullScreenImageBrowser: UIViewControllerTransitioningDelegate {
 extension FullScreenImageBrowser {
     @objc private func handleSingleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
         maskView.setHidden(!maskView.isHidden, animated: true)
+
+        guard let currentImage = currentImage, currentImage.isVideoThumbnail == true else { return }
+        playVideo()
     }
 
     @objc private func handlePanGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -263,8 +264,9 @@ extension FullScreenImageBrowser {
 // MARK: - Video Showcase
 extension FullScreenImageBrowser {
     public func playVideo() {
-        guard let _url = viewModel.videoUrl else { debugPrint("\(#file) invalid url found for video"); return }
-        let player = AVPlayer(url: _url)
+        guard let currentImage = currentImage else { return }
+        guard let videoURL = viewModel.videoURLForImage(currentImage) else { debugPrint("\(#file) invalid url found for video"); return }
+        let player = AVPlayer(url: videoURL)
         let playerController = AVPlayerViewController()
         playerController.player = player
         present(playerController, animated: true, completion: nil)

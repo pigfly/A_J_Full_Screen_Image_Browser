@@ -26,7 +26,7 @@ final class ViewController: UIViewController {
     }
 
     @IBAction func onButtonTapped(_ sender: UIButton) {
-        let vm = FullScreenImageBrowserViewModel(urls: urls, videoUrl: videoUrl)
+        let vm = FullScreenImageBrowserViewModel(imageURLs: urls)
         let x = FullScreenImageBrowser(viewModel: vm)
         present(x, animated: true, completion: nil)
     }
