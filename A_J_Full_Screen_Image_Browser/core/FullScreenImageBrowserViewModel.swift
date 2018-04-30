@@ -14,11 +14,11 @@ public struct FullScreenImageBrowserViewModel {
     ///
     /// - Parameters:
     ///   - imageURLs: image urls
-    ///   - videos: video dictionary, key as video urls, value as associated video thumbnail image urls
-    public init(imageURLs: [URL], videos: [URL: URL] = [:]) {
+    ///   - videos: video array, $0 as video urls, $1 as associated video thumbnail image urls
+    public init(imageURLs: [URL], videos: [(URL, URL)] = []) {
         self.imageURLs = imageURLs
-        self.videoUrls = Array(videos.keys)
-        let thumbnailImages = Array(videos.values).map { SingleImage(imageURL: $0, isVideoThumbnail: true) }
+        self.videoUrls = videos.map { $0.0 }
+        let thumbnailImages = videos.map { SingleImage(imageURL: $0.1, isVideoThumbnail: true) }
         self.videoThumbnails = thumbnailImages
 
         images = imageURLs.map { SingleImage(imageURL: $0) } + thumbnailImages
