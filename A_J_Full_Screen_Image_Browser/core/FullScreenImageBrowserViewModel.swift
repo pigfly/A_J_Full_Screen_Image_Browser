@@ -60,7 +60,7 @@ public struct FullScreenImageBrowserViewModel {
 
     public func videoURLAtIndex(_ index: Int) -> URL? {
         guard index < images.count && index > 0 else { return nil }
-        let videoIdx = index + 1 - images.count
+        let videoIdx = index - imageURLs.count
         guard videoIdx >= 0 else { return nil }
 
         return videoUrls[videoIdx]
