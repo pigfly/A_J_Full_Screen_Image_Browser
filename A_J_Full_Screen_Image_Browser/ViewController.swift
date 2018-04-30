@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
     // videos are just key-value pair
     // key: video url
     // value: thumbnail url for associated video url
-    lazy var videos = [URL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!: URL(string: "https://images.unsplash.com/photo-1502899576159-f224dc2349fa?ixlib=rb-0.3.5&s=4f3943a5d663f9bb062d7d380c8d6fdf&auto=format&fit=crop&w=3700&q=80")!]
+    lazy var videos = [URL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!: URL(string: "https://images.unsplash.com/photo-1502899576159-f224dc2349fa?ixlib=rb-0.3.5&s=4f3943a5d663f9bb062d7d380c8d6fdf&auto=format&fit=crop&w=3700&q=80")!, URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")!: URL(string: "https://images.unsplash.com/photo-1502899576159-f224dc2349fa?ixlib=rb-0.3.5&s=4f3943a5d663f9bb062d7d380c8d6fdf&auto=format&fit=crop&w=3700&q=80")!]
 
     override func viewDidLoad() {
         super.viewDidLoad()
