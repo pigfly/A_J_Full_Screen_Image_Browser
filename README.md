@@ -27,9 +27,9 @@ A-J-Full-Screen-Image-Browser is an drop-in solution for full screen image and v
 
 ## Requirements
 
-- iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 8.3+
-- Swift 3.1+
+- iOS 9.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
+- Xcode 9.0+
+- Swift 4.0+
 
 ## Installation
 
@@ -42,26 +42,21 @@ import UIKit
 
 final class ViewController: UIViewController {
 
-    lazy var images: [ImageAsyncDownloadable] = {
-        return [SingleImage(imageURL: URL(string: "https://images.unsplash.com/photo-1445264918150-66a2371142a2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=79730c9ec106e3ccee026c648c624e5f&auto=format&fit=crop&w=3800&q=80")!),
-                SingleImage(imageURL: URL(string: "https://images.unsplash.com/photo-1483086431886-3590a88317fe?ixlib=rb-0.3.5&s=96129ab02a4a277f5c27273d14323a9a&auto=format&fit=crop&w=3668&q=80")!)]
+    lazy var testVideo: MediaDownloadable = {
+        return SingleMedia(imageURL: URL(string: "https://dummyimage.com/600&text=thumbnail")!,
+                    isVideoThumbnail: true,
+                    videoURL: URL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!)
     }()
 
-    lazy var urls = [URL(string: "https://images.unsplash.com/photo-1502899576159-f224dc2349fa?ixlib=rb-0.3.5&s=4f3943a5d663f9bb062d7d380c8d6fdf&auto=format&fit=crop&w=3700&q=80")!,
-                     URL(string: "https://images.unsplash.com/photo-1445264918150-66a2371142a2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=79730c9ec106e3ccee026c648c624e5f&auto=format&fit=crop&w=3800&q=80")!]
-
-    // videos are just key-value pair
-    // key: video url
-    // value: thumbnail url for associated video url
-    lazy var videos = [URL(string: "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v")!: URL(string: "https://images.unsplash.com/photo-1502899576159-f224dc2349fa?ixlib=rb-0.3.5&s=4f3943a5d663f9bb062d7d380c8d6fdf&auto=format&fit=crop&w=3700&q=80")!]
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
+    lazy var media: [MediaDownloadable] = {
+        return [testVideo,
+                SingleMedia(imageURL: URL(string: "https://dummyimage.com/300")!),
+                SingleMedia(imageURL: URL(string: "https://dummyimage.com/600")!),
+                testVideo]
+    }()
 
     @IBAction func onButtonTapped(_ sender: UIButton) {
-        let vm = FullScreenImageBrowserViewModel(imageURLs: urls, videos: videos)
+        let vm = FullScreenImageBrowserViewModel(media: media)
         let x = FullScreenImageBrowser(viewModel: vm)
         present(x, animated: true, completion: nil)
     }
@@ -79,14 +74,16 @@ The following code snippet shows an example how to use `AlamofireImage` to seaml
 import Foundation
 import AlamofireImage
 
-public class FullScreenImage: ImageAsyncDownloadable {
+public class FullScreenImage: MediaDownloadable {
     public var image: UIImage?
     public var imageURL: URL?
+    public var videoURL: URL?
+    public var isVideoThumbnail: Bool
 
-    private let downloader = ImageDownloader()
-
-    public init(imageURL: URL?) {
+    public init(imageURL: URL?, isVideoThumbnail: Bool = false, videoURL: URL? = nil) {
         self.imageURL = imageURL
+        self.videoURL = videoURL
+        self.isVideoThumbnail = isVideoThumbnail
     }
 
     public func loadImageWithCompletionHandler(_ completion: @escaping (UIImage?, NSError?) -> Void) {
@@ -136,7 +133,7 @@ public class FullScreenImage: ImageAsyncDownloadable {
 ├── core
 │   ├── FullScreenImageBrowser.swift
 │   ├── FullScreenImageBrowserViewModel.swift
-│   ├── Image+AsyncDownload.swift
+│   ├── MediaDownloadable.swift
 │   ├── MaskImageViewer.swift
 │   ├── SingleImageViewer.swift
 │   └── ZoomableImageView.swift
@@ -151,7 +148,7 @@ public class FullScreenImage: ImageAsyncDownloadable {
 | asset                                | customised static image asset for the full screen image/video browser navigation bar |
 | core/FullScreenImageBrowser          | manager class to be responsible for full screen image/video browser                  |
 | core/FullScreenImageBrowserViewModel | datasource and business logic for full screen image/video browser                    |
-| core/Image+AsyncDownload             | protocol to define images to be able to asynchronously download                      |
+| core/MediaDownloadable               | protocol to define images to be able to asynchronously download                      |
 | core/MaskImageViewer                 | `customised` overlay view for full screen image/video browser                        |
 | core/SingleImageViewer               | view controller to be responsible for single image rendering on the full screen      |
 | core/ZoomableImageView               | view to add support for image to zoom, pin, rotate, and animation                    |
