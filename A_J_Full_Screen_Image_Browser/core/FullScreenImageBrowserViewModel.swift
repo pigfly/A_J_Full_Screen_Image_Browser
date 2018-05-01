@@ -10,14 +10,16 @@ import Foundation
 
 public struct FullScreenImageBrowserViewModel {
 
-
+    /// Designated Init
+    ///
+    /// - Parameter media: a collection of media to be either video or image
     public init(media: [MediaDownloadable]) {
         self.media = media
     }
 
     public private(set) var media: [MediaDownloadable]
 
-    // MARK: - Image
+    // MARK: - Media
 
     public var numberOfImages: Int {
         return media.count
