@@ -1,5 +1,5 @@
 //
-//  Image+AsyncDownload.swift
+//  MediaDownloadable.swift
 //  A_J_Full_Screen_Image_Browser
 //
 //  Created by Junliang Jiang on 25/2/18.
@@ -8,10 +8,11 @@
 
 import UIKit
 
-public protocol ImageAsyncDownloadable: class {
+public protocol MediaDownloadable: class {
     var image: UIImage? { get }
     var imageURL: URL? { get }
     var isVideoThumbnail: Bool { get set }
+    var videoURL: URL? { get }
     
     func loadImageWithCompletionHandler(_ completion: @escaping (_ image: UIImage?, _ error: NSError?) -> ())
 }

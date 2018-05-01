@@ -18,18 +18,18 @@ public struct FullScreenImageBrowserViewModel {
     public init(imageURLs: [URL], videos: [(URL, URL)] = []) {
         self.imageURLs = imageURLs
         self.videoUrls = videos.map { $0.0 }
-        let thumbnailImages = videos.map { SingleImage(imageURL: $0.1, isVideoThumbnail: true) }
+        let thumbnailImages = videos.map { SingleMedia(imageURL: $0.1, isVideoThumbnail: true) }
         self.videoThumbnails = thumbnailImages
 
-        images = imageURLs.map { SingleImage(imageURL: $0) } + thumbnailImages
+        images = imageURLs.map { SingleMedia(imageURL: $0) } + thumbnailImages
     }
 
     public private(set) var imageURLs: [URL]
     public private(set) var videoUrls: [URL]
-    public private(set) var videoThumbnails: [ImageAsyncDownloadable] = []
+    public private(set) var videoThumbnails: [MediaDownloadable] = []
 
     // the images contain both static image and video thumbnail images
-    public private(set) var images: [ImageAsyncDownloadable] = []
+    public private(set) var images: [MediaDownloadable] = []
 
     // MARK: - Image
 
@@ -37,18 +37,18 @@ public struct FullScreenImageBrowserViewModel {
         return images.count
     }
 
-    public func imageAtIndex(_ index: Int) -> ImageAsyncDownloadable? {
+    public func imageAtIndex(_ index: Int) -> MediaDownloadable? {
         if (index < images.count && index >= 0) {
             return images[index]
         }
         return nil
     }
 
-    public func indexOfImage(_ image: ImageAsyncDownloadable) -> Int? {
+    public func indexOfImage(_ image: MediaDownloadable) -> Int? {
         return images.index(where: { $0 === image })
     }
 
-    public func containsImage(_ image: ImageAsyncDownloadable) -> Bool {
+    public func containsImage(_ image: MediaDownloadable) -> Bool {
         return indexOfImage(image) != nil
     }
 
@@ -66,7 +66,7 @@ public struct FullScreenImageBrowserViewModel {
         return videoUrls[videoIdx]
     }
 
-    public func videoURLForImage(_ image: ImageAsyncDownloadable) -> URL? {
+    public func videoURLForImage(_ image: MediaDownloadable) -> URL? {
         guard image.isVideoThumbnail == true else { return nil}
         guard let idx = indexOfImage(image) else { return nil }
 

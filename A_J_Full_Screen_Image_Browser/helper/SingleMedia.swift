@@ -1,5 +1,5 @@
 //
-//  SingleImage.swift
+//  SingleMedia.swift
 //  A_J_Full_Screen_Image_Browser
 //
 //  Created by Alex Jiang on 26/2/18.
@@ -8,9 +8,10 @@
 
 import UIKit
 
-public final class SingleImage: ImageAsyncDownloadable {
+public final class SingleMedia: MediaDownloadable {
     public var image: UIImage?
     public var imageURL: URL?
+    public var videoURL: URL?
     public var isVideoThumbnail: Bool
     
     public init(imageURL: URL?, isVideoThumbnail: Bool = false) {

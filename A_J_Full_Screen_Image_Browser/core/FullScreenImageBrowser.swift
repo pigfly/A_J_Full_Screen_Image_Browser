@@ -38,7 +38,7 @@ public final class FullScreenImageBrowser: UIViewController {
         }
     }
 
-    public var currentImage: ImageAsyncDownloadable? {
+    public var currentImage: MediaDownloadable? {
         return currentImageViewer?.asyncImage
     }
 
@@ -69,7 +69,7 @@ public final class FullScreenImageBrowser: UIViewController {
      - returns: an instance of full screen image browser
      */
     public required init(viewModel: FullScreenImageBrowserViewModel,
-                startingImage: ImageAsyncDownloadable? = nil,
+                startingImage: MediaDownloadable? = nil,
                 referenceView: UIView? = nil) {
         self.viewModel = viewModel
         pageViewController = UIPageViewController()
@@ -80,7 +80,7 @@ public final class FullScreenImageBrowser: UIViewController {
         transitionAnimator.endingView = currentImageViewer?.zoomableImageview.imageView
     }
 
-    private func initialSetupWithImage(_ image: ImageAsyncDownloadable? = nil) {
+    private func initialSetupWithImage(_ image: MediaDownloadable? = nil) {
         maskView.imagesBrowser = self
         setupPageViewControllerWith(image)
 
@@ -96,7 +96,7 @@ public final class FullScreenImageBrowser: UIViewController {
         #endif
     }
 
-    private func setupPageViewControllerWith(_ image: ImageAsyncDownloadable? = nil) {
+    private func setupPageViewControllerWith(_ image: MediaDownloadable? = nil) {
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [UIPageViewControllerOptionInterPageSpacingKey: 16.0])
         pageViewController.view.backgroundColor = .clear
         pageViewController.delegate = self
@@ -157,12 +157,12 @@ public final class FullScreenImageBrowser: UIViewController {
      - parameter image:    The photo to make the currently displayed photo.
      - parameter animated: Whether to animate the transition to the new photo.
      */
-    public func changeToImage(_ image: ImageAsyncDownloadable,
+    public func changeToImage(_ image: MediaDownloadable,
                               animated: Bool,
                               direction: UIPageViewControllerNavigationDirection = .forward) {
         if !viewModel.containsImage(image) { return }
 
-        let imageViewer = singleImageViewerFor(image)
+        let imageViewer = SingleMediaViewerFor(image)
         pageViewController.setViewControllers([imageViewer], direction: direction, animated: animated, completion: nil)
         updateCurrentImageInfo()
     }
@@ -180,33 +180,33 @@ extension FullScreenImageBrowser: UIPageViewControllerDataSource, UIPageViewCont
     /*
      * Currently displayed by page view controller
      */
-    public var currentImageViewer: SingleImageViewer? {
-        return pageViewController.viewControllers?.first as? SingleImageViewer
+    public var currentImageViewer: SingleMediaViewer? {
+        return pageViewController.viewControllers?.first as? SingleMediaViewer
     }
 
-    public func singleImageViewerFor(_ image: ImageAsyncDownloadable) -> SingleImageViewer {
-        let imageViewer = SingleImageViewer(image: image)
+    public func SingleMediaViewerFor(_ image: MediaDownloadable) -> SingleMediaViewer {
+        let imageViewer = SingleMediaViewer(image: image)
         singleTapGestureRecognizer.require(toFail: imageViewer.doubleTapGestureRecognizer)
 
         return imageViewer
     }
 
     @objc public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let imageViewer = viewController as? SingleImageViewer,
+        guard let imageViewer = viewController as? SingleMediaViewer,
             let index = viewModel.indexOfImage(imageViewer.asyncImage),
             let newImage = viewModel.imageAtIndex(index - 1) else {
                 return nil
         }
-        return singleImageViewerFor(newImage)
+        return SingleMediaViewerFor(newImage)
     }
 
     @objc public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let imageViewer = viewController as? SingleImageViewer,
+        guard let imageViewer = viewController as? SingleMediaViewer,
             let index = viewModel.indexOfImage(imageViewer.asyncImage),
             let newImage = viewModel.imageAtIndex(index + 1) else {
                 return nil
         }
-        return singleImageViewerFor(newImage)
+        return SingleMediaViewerFor(newImage)
     }
 
     @objc public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {

@@ -1,5 +1,5 @@
 //
-//  SingleImageViewer.swift
+//  SingleMediaViewer.swift
 //  A_J_Full_Screen_Image_Browser
 //
 //  Created by Junliang Jiang on 25/2/18.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-public final class SingleImageViewer: UIViewController, UIScrollViewDelegate {
+public final class SingleMediaViewer: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Property
-    public var asyncImage: ImageAsyncDownloadable
+    public var asyncImage: MediaDownloadable
 
     public lazy private(set) var zoomableImageview: ZoomableImageView = {
         return ZoomableImageView()
     }()
 
     public lazy private(set) var doubleTapGestureRecognizer: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(SingleImageViewer.handleDoubleTapWithGestureRecognizer(_:)))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(SingleMediaViewer.handleDoubleTapWithGestureRecognizer(_:)))
         gesture.numberOfTapsRequired = 2
         return gesture
     }()
@@ -30,7 +30,7 @@ public final class SingleImageViewer: UIViewController, UIScrollViewDelegate {
     }()
 
     // MARK: - Init
-    public init(image: ImageAsyncDownloadable) {
+    public init(image: MediaDownloadable) {
         asyncImage = image
         super.init(nibName: nil, bundle: nil)
     }
