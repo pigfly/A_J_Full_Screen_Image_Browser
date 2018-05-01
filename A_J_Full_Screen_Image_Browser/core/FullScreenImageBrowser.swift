@@ -38,22 +38,22 @@ public final class FullScreenImageBrowser: UIViewController {
         }
     }
 
-    public var currentImage: MediaDownloadable? {
-        return currentImageViewer?.asyncImage
+    public var currentMedia: MediaDownloadable? {
+        return currentImageViewer?.media
     }
 
     private var statusBarHidden = false
 
     // MARK: - Init
     required public init?(coder aDecoder: NSCoder) {
-        viewModel = FullScreenImageBrowserViewModel(imageURLs: [])
+        viewModel = FullScreenImageBrowserViewModel(media: [])
         pageViewController = UIPageViewController()
         super.init(nibName: nil, bundle: nil)
         initialSetupWithImage(nil)
     }
 
     public override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
-        viewModel = FullScreenImageBrowserViewModel(imageURLs: [])
+        viewModel = FullScreenImageBrowserViewModel(media: [])
         pageViewController = UIPageViewController()
         super.init(nibName: nil, bundle: nil)
         initialSetupWithImage(nil)
@@ -75,7 +75,7 @@ public final class FullScreenImageBrowser: UIViewController {
         pageViewController = UIPageViewController()
         super.init(nibName: nil, bundle: nil)
 
-        initialSetupWithImage(startingImage == nil ? viewModel.images.first : startingImage)
+        initialSetupWithImage(startingImage == nil ? viewModel.media.first : startingImage)
         transitionAnimator.startingView = referenceView
         transitionAnimator.endingView = currentImageViewer?.zoomableImageview.imageView
     }
@@ -102,9 +102,9 @@ public final class FullScreenImageBrowser: UIViewController {
         pageViewController.delegate = self
         pageViewController.dataSource = self
 
-        if let _image = image, viewModel.containsImage(_image) {
+        if let _image = image, viewModel.containsMedia(_image) {
             changeToImage(_image, animated: false)
-        } else if let _image = viewModel.images.first {
+        } else if let _image = viewModel.media.first {
             changeToImage(_image, animated: false)
         }
     }
@@ -124,9 +124,9 @@ public final class FullScreenImageBrowser: UIViewController {
     // MARK: - View Controller Life Cycle
     override public func viewDidLoad() {
         super.viewDidLoad()
-        view.tintColor = UIColor.white
-        view.backgroundColor = UIColor.black
-        pageViewController.view.backgroundColor = UIColor.clear
+        view.tintColor = .white
+        view.backgroundColor = .black
+        pageViewController.view.backgroundColor = .clear
 
         pageViewController.view.addGestureRecognizer(panGestureRecognizer)
         pageViewController.view.addGestureRecognizer(singleTapGestureRecognizer)
@@ -154,21 +154,21 @@ public final class FullScreenImageBrowser: UIViewController {
     /**
      Displays the specified image. Can be called before the view controller is displayed.
 
-     - parameter image:    The photo to make the currently displayed photo.
+     - parameter media:    The photo to make the currently displayed photo.
      - parameter animated: Whether to animate the transition to the new photo.
      */
-    public func changeToImage(_ image: MediaDownloadable,
+    public func changeToImage(_ media: MediaDownloadable,
                               animated: Bool,
                               direction: UIPageViewControllerNavigationDirection = .forward) {
-        if !viewModel.containsImage(image) { return }
+        if !viewModel.containsMedia(media) { return }
 
-        let imageViewer = SingleMediaViewerFor(image)
+        let imageViewer = SingleMediaViewerFor(media)
         pageViewController.setViewControllers([imageViewer], direction: direction, animated: animated, completion: nil)
         updateCurrentImageInfo()
     }
 
     private func updateCurrentImageInfo() {
-        if let _currentImage = currentImage {
+        if let _currentImage = currentMedia {
             maskView.populateWithImage(_currentImage)
         }
     }
@@ -184,8 +184,8 @@ extension FullScreenImageBrowser: UIPageViewControllerDataSource, UIPageViewCont
         return pageViewController.viewControllers?.first as? SingleMediaViewer
     }
 
-    public func SingleMediaViewerFor(_ image: MediaDownloadable) -> SingleMediaViewer {
-        let imageViewer = SingleMediaViewer(image: image)
+    public func SingleMediaViewerFor(_ media: MediaDownloadable) -> SingleMediaViewer {
+        let imageViewer = SingleMediaViewer(media: media)
         singleTapGestureRecognizer.require(toFail: imageViewer.doubleTapGestureRecognizer)
 
         return imageViewer
@@ -193,8 +193,8 @@ extension FullScreenImageBrowser: UIPageViewControllerDataSource, UIPageViewCont
 
     @objc public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let imageViewer = viewController as? SingleMediaViewer,
-            let index = viewModel.indexOfImage(imageViewer.asyncImage),
-            let newImage = viewModel.imageAtIndex(index - 1) else {
+            let index = viewModel.indexOfMedia(imageViewer.media),
+            let newImage = viewModel.mediaAtIndex(index - 1) else {
                 return nil
         }
         return SingleMediaViewerFor(newImage)
@@ -202,8 +202,8 @@ extension FullScreenImageBrowser: UIPageViewControllerDataSource, UIPageViewCont
 
     @objc public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let imageViewer = viewController as? SingleMediaViewer,
-            let index = viewModel.indexOfImage(imageViewer.asyncImage),
-            let newImage = viewModel.imageAtIndex(index + 1) else {
+            let index = viewModel.indexOfMedia(imageViewer.media),
+            let newImage = viewModel.mediaAtIndex(index + 1) else {
                 return nil
         }
         return SingleMediaViewerFor(newImage)
@@ -234,7 +234,7 @@ extension FullScreenImageBrowser {
     @objc private func handleSingleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
         maskView.setHidden(!maskView.isHidden, animated: true)
 
-        guard let currentImage = currentImage, currentImage.isVideoThumbnail == true else { return }
+        guard let currentMedia = currentMedia, currentMedia.isVideoThumbnail == true else { return }
         playVideo()
     }
 
@@ -264,8 +264,8 @@ extension FullScreenImageBrowser {
 // MARK: - Video Showcase
 extension FullScreenImageBrowser {
     public func playVideo() {
-        guard let currentImage = currentImage else { return }
-        guard let videoURL = viewModel.videoURLForImage(currentImage) else { debugPrint("\(#file) invalid url found for video"); return }
+        guard let currentMedia = currentMedia else { return }
+        guard let videoURL = currentMedia.videoURL else { debugPrint("\(#file) invalid url found for video"); return }
         let player = AVPlayer(url: videoURL)
         let playerController = AVPlayerViewController()
         playerController.player = player

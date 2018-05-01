@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol MaskImageViewable: class {
-    weak var imagesBrowser: FullScreenImageBrowser? { get set }
+    var imagesBrowser: FullScreenImageBrowser? { get set }
 
     func populateWithImage(_ image: MediaDownloadable)
     func setHidden(_ hidden: Bool, animated: Bool)
@@ -20,7 +20,7 @@ public final class MaskImageView: UIView , MaskImageViewable {
 
     public private(set) var navigationItem: UINavigationItem!
     public weak var imagesBrowser: FullScreenImageBrowser?
-    private var currentImage: MediaDownloadable?
+    private var currentMedia: MediaDownloadable?
 
     public var leftBarButtonItem: UIBarButtonItem? {
         didSet {
@@ -80,11 +80,11 @@ public final class MaskImageView: UIView , MaskImageViewable {
                        completion: { _ in self.alpha = 1.0; self.isHidden = hidden })
     }
 
-    public func populateWithImage(_ image: MediaDownloadable) {
-        currentImage = image
+    public func populateWithImage(_ media: MediaDownloadable) {
+        currentMedia = media
 
         guard let _imagesBrowser = imagesBrowser,
-              let index = imagesBrowser?.viewModel.indexOfImage(image) else { return }
+              let index = imagesBrowser?.viewModel.indexOfMedia(media) else { return }
 
         navigationItem.title = String(format:NSLocalizedString("%d of %d",comment:""),
                                       index+1,

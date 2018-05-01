@@ -14,8 +14,9 @@ public final class SingleMedia: MediaDownloadable {
     public var videoURL: URL?
     public var isVideoThumbnail: Bool
     
-    public init(imageURL: URL?, isVideoThumbnail: Bool = false) {
+    public init(imageURL: URL?, isVideoThumbnail: Bool = false, videoURL: URL? = nil) {
         self.imageURL = imageURL
+        self.videoURL = videoURL
         self.isVideoThumbnail = isVideoThumbnail
     }
 

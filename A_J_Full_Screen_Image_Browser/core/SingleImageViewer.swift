@@ -11,7 +11,7 @@ import UIKit
 public final class SingleMediaViewer: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Property
-    public var asyncImage: MediaDownloadable
+    public var media: MediaDownloadable
 
     public lazy private(set) var zoomableImageview: ZoomableImageView = {
         return ZoomableImageView()
@@ -30,8 +30,8 @@ public final class SingleMediaViewer: UIViewController, UIScrollViewDelegate {
     }()
 
     // MARK: - Init
-    public init(image: MediaDownloadable) {
-        asyncImage = image
+    public init(media: MediaDownloadable) {
+        self.media = media
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -59,11 +59,11 @@ public final class SingleMediaViewer: UIViewController, UIScrollViewDelegate {
 
         view.addGestureRecognizer(doubleTapGestureRecognizer)
 
-        if let image = asyncImage.image {
+        if let image = media.image {
             zoomableImageview.image = image
             activityIndicator.stopAnimating()
         } else {
-            loadAsyncImage()
+            loadmedia()
         }
     }
 
@@ -73,9 +73,9 @@ public final class SingleMediaViewer: UIViewController, UIScrollViewDelegate {
     }
 
     // MARK: - Private
-    private func loadAsyncImage() {
+    private func loadmedia() {
         view.bringSubview(toFront: activityIndicator)
-        asyncImage.loadImageWithCompletionHandler({ [weak self] (image, error) -> () in
+        media.loadImageWithCompletionHandler({ [weak self] (image, error) -> () in
             let completeLoading = {
                 self?.activityIndicator.stopAnimating()
                 self?.zoomableImageview.image = image
