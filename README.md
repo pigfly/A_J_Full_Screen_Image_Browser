@@ -57,8 +57,8 @@ final class ViewController: UIViewController {
 
     @IBAction func onButtonTapped(_ sender: UIButton) {
         let vm = FullScreenImageBrowserViewModel(media: media)
-        let x = FullScreenImageBrowser(viewModel: vm)
-        present(x, animated: true, completion: nil)
+        let browser = FullScreenImageBrowser(viewModel: vm)
+        present(browser, animated: true, completion: nil)
     }
 
 }
